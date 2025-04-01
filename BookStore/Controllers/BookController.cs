@@ -1,4 +1,5 @@
 ﻿using BookStore.BookOperations.CreateBook;
+using BookStore.BookOperations.GetBookById;
 using BookStore.BookOperations.GetBooks;
 using BookStore.BookOperations.UpdateBook;
 using BookStore.DbOperations;
