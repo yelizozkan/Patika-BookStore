@@ -1,16 +1,20 @@
-﻿using BookStore.DbOperations;
+﻿using AutoMapper;
+using BookStore.Common;
+using BookStore.DbOperations;
 using Microsoft.EntityFrameworkCore;
 
-namespace BookStore.BookOperations.GetBookById
+namespace BookStore.BookOperations.GetBooks
 {
     public class GetBookByIdQuery
     {
         public int BookId { get; set; }
         private readonly BookStoreDbContext _dbContext;
+        private readonly IMapper _mapper;
 
-        public GetBookByIdQuery(BookStoreDbContext dbContext)
+        public GetBookByIdQuery(BookStoreDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
 
         public BookViewModel Handle()
@@ -19,11 +23,7 @@ namespace BookStore.BookOperations.GetBookById
             if (book == null)
                 throw new InvalidOperationException("The book does not exist");
 
-            BookViewModel viewModel = new BookViewModel();
-            viewModel.Title = book.Title;
-            viewModel.GenreId = book.GenreId;
-            viewModel.PageCount = book.PageCount;
-            viewModel.PublishDate = book.PublishDate;
+            BookViewModel viewModel = _mapper.Map<BookViewModel>(book);
 
             return viewModel;
         }
@@ -31,7 +31,7 @@ namespace BookStore.BookOperations.GetBookById
         public class BookViewModel
         {
             public string Title { get; set; }
-            public int GenreId { get; set; }
+            public string Genre { get; set; }
             public int PageCount { get; set; }
             public DateTime PublishDate { get; set; }
         }
