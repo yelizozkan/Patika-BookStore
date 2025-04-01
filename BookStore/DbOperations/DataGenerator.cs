@@ -18,21 +18,21 @@ namespace BookStore.DbOperations
                     new Book
                     {
                         Title = "The Great Gatsby",
-                        GenreId = 1,
+                        GenreId = 1, //Personal Growth
                         PageCount = 180,
                         PublishDate = new DateTime(1925, 4, 10)
                     },
                     new Book
                     {
                         Title = "Herland",
-                        GenreId = 2,
+                        GenreId = 2, //Science Fiction
                         PageCount = 250,
                         PublishDate = new DateTime(2010, 5, 10)
                     },
                     new Book
                     {
                         Title = "Dune",
-                        GenreId = 3,
+                        GenreId = 2, //Science Fiction
                         PageCount = 540,
                         PublishDate = new DateTime(2001, 12, 21)
                     }
