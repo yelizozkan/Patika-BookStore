@@ -1,6 +1,11 @@
 using BookStore.DbOperations;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+builder.Services.AddDbContext<BookStoreDbContext>(options =>
+    options.UseInMemoryDatabase("BookStoreDB"));
 
 // Add services to the container.
 
@@ -14,6 +19,8 @@ using (var scope = builder.Services.BuildServiceProvider().CreateScope())
     var services = scope.ServiceProvider;
     DataGenerator.Initialize(services); 
 }
+
+
 
 var app = builder.Build();
 

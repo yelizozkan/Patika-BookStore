@@ -6,9 +6,9 @@ namespace BookStore.DbOperations
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
-            using (var context = new BookStoreDbContext(serviceProvider.GetRequiredService<DbContextOptions<BookStoreDbContext>>()))
+            using (var context = serviceProvider.GetRequiredService<BookStoreDbContext>())
             {
-                
+
                 if (context.Books.Any())
                 {
                     return;   
