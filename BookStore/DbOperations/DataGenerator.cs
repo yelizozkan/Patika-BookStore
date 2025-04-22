@@ -53,6 +53,27 @@ namespace BookStore.DbOperations
                     }
                 );
 
+                context.Authors.AddRange(
+                    new Author
+                    {
+                        Name = "F. Scott Fitzgerald",
+                        Surname = "Fitzgerald",
+                        BirthDate = new DateTime(1896, 9, 24)
+                    },
+                    new Author
+                    {
+                        Name = "Charlotte Perkins",
+                        Surname = "Gilman",
+                        BirthDate = new DateTime(1860, 7, 3)
+                    },
+                    new Author
+                    {
+                        Name = "Frank Herbert",
+                        Surname = "Herbert",
+                        BirthDate = new DateTime(1920, 10, 8)
+                    }
+                );
+
                 context.SaveChanges();
             }
         }

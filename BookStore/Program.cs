@@ -36,6 +36,9 @@ using (var scope = builder.Services.BuildServiceProvider().CreateScope())
     DataGenerator.Initialize(services); 
 }
 
+builder.Services.AddScoped<BookStoreDbContext>(provider => provider.GetService<BookStoreDbContext>());
+builder.Services.AddScoped<IBookStoreDbContext>(provider => provider.GetService<BookStoreDbContext>());
+
 
 
 var app = builder.Build();
