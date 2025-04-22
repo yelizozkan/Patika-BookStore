@@ -3,7 +3,7 @@ using BookStore.DbOperations;
 using BookStore.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace BookStore.BookOperations.CreateBook
+namespace BookStore.Application.BookOperations.Commands.CreateBook
 {
 
     public class CreateBookCommand
@@ -19,16 +19,16 @@ namespace BookStore.BookOperations.CreateBook
             _mapper = mapper;
         }
 
-        public void Handle() 
+        public void Handle()
         {
             var book = _dbContext.Books.SingleOrDefault(x => x.Title == Model.Title);
 
             if (book != null)
-            
+
                 throw new InvalidOperationException("The book already exists");
 
             book = _mapper.Map<Book>(Model);
-            
+
             _dbContext.Books.Add(book);
             _dbContext.SaveChanges();
         }
@@ -39,6 +39,8 @@ namespace BookStore.BookOperations.CreateBook
             public int GenreId { get; set; }
             public int PageCount { get; set; }
             public DateTime PublishDate { get; set; }
+
+            public int AuthorId { get; set; }
         }
     }
 }

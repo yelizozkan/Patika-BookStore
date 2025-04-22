@@ -3,7 +3,7 @@ using BookStore.Common;
 using BookStore.DbOperations;
 using Microsoft.EntityFrameworkCore;
 
-namespace BookStore.BookOperations.GetBooks
+namespace BookStore.Application.BookOperations.Queries.GetBooks
 {
     public class GetBookByIdQuery
     {
@@ -19,7 +19,7 @@ namespace BookStore.BookOperations.GetBooks
 
         public BookViewModel Handle()
         {
-            var book = _dbContext.Books.SingleOrDefault(x => x.Id == BookId);
+            var book = _dbContext.Books.Include(x=> x.Genre).Where(book => book.Id == BookId).SingleOrDefault();
             if (book == null)
                 throw new InvalidOperationException("The book does not exist");
 

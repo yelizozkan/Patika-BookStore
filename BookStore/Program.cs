@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using BookStore.Middlewares;
+using BookStore.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +18,8 @@ builder.Services.AddAutoMapper(cfg => cfg.AddMaps(Assembly.GetExecutingAssembly(
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddFluentValidationClientsideAdapters();
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+builder.Services.AddSingleton<ILoggerService, ConsoleLogger>();
+builder.Services.AddSingleton<ILoggerService, DbLogger>();
 
 
 
@@ -46,6 +50,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseCustomExceptionMiddleware();
 
 app.MapControllers();
 
